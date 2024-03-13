@@ -1,4 +1,4 @@
-# k400p-fn-lock-for-windows
+# k400p-fn-lock-win
  Lock Fn keys on K400+ (for windows)
 
 ## Goal
@@ -9,7 +9,7 @@ I wanted a simple way to do the same as the Logitech Options/Options+ softwares 
 
 ## Download
 Precompiled binaries available here :
-https://github.com/dheygere/k400p-fn-lock-for-windows/releases/tag/v1.0.0
+https://github.com/h8man/k400p-fn-lock-win/releases/tag/1a
 
 ## How to use
 Running `k400p-fn-lock.exe` will lock Fn key till next reboot.  
