@@ -24,5 +24,5 @@ Revert with `k400p-fn-unlocklock.exe` to unlock and restore media keys.
     `build.bat`
 
 # Inspiration
-code from : https://github.com/dheygere/k380-fn-lock-for-windows
-values from : https://github.com/sginne/fn_key_k400_for_logitech
+- code from : https://github.com/dheygere/k380-fn-lock-for-windows
+- values from : https://github.com/sginne/fn_key_k400_for_logitech
