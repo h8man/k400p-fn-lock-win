@@ -9,11 +9,15 @@ I wanted a simple way to do the same as the Logitech Options/Options+ softwares 
 
 ## Download
 Precompiled binaries available here :
-https://github.com/h8man/k400p-fn-lock-win/releases/tag/1a
+https://github.com/h8man/k400p-fn-lock-win/releases
 
 ## How to use
-Running `k400p-fn-lock.exe` will lock Fn key till next reboot.  
+Running `k400p-fn-lock.exe` will lock Fn key till next reboot. You may want to add into Task Scheduler or pin to taskbar.
 Revert with `k400p-fn-unlocklock.exe` to unlock and restore media keys.
+
+Running `tray.exe` will lunch tray app where you'll have options to Fn (Un)Lock your keyboard
+
+Running `add_startup_tray.bat` will put tray app on startup.
 
 ## How to build
 
@@ -22,6 +26,7 @@ Revert with `k400p-fn-unlocklock.exe` to unlock and restore media keys.
     `gcc main.c -D setMediaKeys -o dist/k400p-fn-unlock.exe -I hidapi/include -L hidapi/x86 -lhidapi`
 - build with msvc:
     `build.bat`
+    `build_tray.bat`
 
 # Inspiration
 - code from : https://github.com/dheygere/k380-fn-lock-for-windows
