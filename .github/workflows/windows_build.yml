@@ -1,0 +1,62 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Windows Release Build
+
+on:
+ push:
+    tags:
+      - 'v*.*.*'  # Only run on version tags, e.g., v1.0.0
+ workflow_dispatch:
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: .
+
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: write   # REQUIRED for creating releases
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+    
+    - name: Build
+      run: |
+        mkdir dist
+        .\build.bat
+        .\build_tray.bat
+      
+    - name: Create ZIP with EXE + DLLs
+      run: |
+        xcopy add_startup.bat dist\
+        xcopy add_startup_tray.bat dist\
+        mkdir release
+        xcopy dist\*.* release\
+        powershell Compress-Archive -Path release\* -DestinationPath k400p-fn-lock-win-${{ github.ref_name }}.zip
+        
+    - name: Upload EXE artifact
+      uses: actions/upload-artifact@v7
+      with:
+        name: k400p-fn-lock-win-release
+        path: release\
+        
+    - name: Release
+      uses: softprops/action-gh-release@v3
+      if: github.ref_type == 'tag'
+      with:
+        files: k400p-fn-lock-win-*.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
